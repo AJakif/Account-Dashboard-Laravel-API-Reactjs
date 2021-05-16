@@ -1,10 +1,10 @@
-#This is a Accounts Dashboard developed with laravel Restful API and reactjs
+# This is a Accounts Dashboard developed with laravel Restful API and reactjs
 
 Versions
 -------------
-Laravel : 8.*
-Composer : 2.*
-React JS : 19.*
+* Laravel : 8.*
+* Composer : 2.*
+* React JS : 19.*
 
 Install and Run Proccess:
 ---------------------------
@@ -22,7 +22,7 @@ Install and Run Proccess:
 Start the server
 --------------------------
 
-Go to backend folder , open CMD and type (php artisan serve)
-Go to front end folder , open CMD and type (npm start)
+* Go to backend folder , open CMD and type (php artisan serve)
+* Go to front end folder , open CMD and type (npm start)
 
 # Please do give some suggestion, thank you
