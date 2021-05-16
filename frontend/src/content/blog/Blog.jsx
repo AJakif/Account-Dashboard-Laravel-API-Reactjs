@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
 
 const Blog = () => {
+	const [blog, setBlog] = useState([]);
+	useEffect(() => {
+		loadBlog();
+	}, []);
+
+	const loadBlog = async () => {
+		await Axios
+			.get(`http://127.0.0.1:8000/api/blog`)
+			.then(
+				response => setBlog(response.data)
+			).catch(error => {
+				return error;
+			});
+	};
 	return (
 		<>
 			<div className="card shadow mb-4">
@@ -20,7 +35,6 @@ const Blog = () => {
 				</div>
 				<div className="card-body">
 					<div className="table-responsive">
-						@if(count($blogs)&gt;0)
 						<table
 							className="table table-bordered"
 							id="product-dataTable"
@@ -52,95 +66,78 @@ const Blog = () => {
 								</tr>
 							</tfoot>
 							<tbody>
-								<tr>
-									<td>
-										{"{"}
-										{"{"}$blog-&gt;id{"}"}
-										{"}"}
-									</td>
-									<td>
-										{"{"}
-										{"{"}$blog-&gt;title{"}"}
-										{"}"}
-									</td>
-									<td>
-										{"{"}
-										{"{"}$blog-&gt;cat_info-&gt;title{"}"}
-										{"}"}
-									</td>
-									<td>
-										{"{"}
-										{"{"}$blog-&gt;tags{"}"}
-										{"}"}
-									</td>
-									<td>
-										{"{"}
-										{"{"}$data-&gt;username{"}"}
-										{"}"}
-									</td>
-									<td>
-										<img
-											src="{{$blog->photo}}"
-											className="img-fluid zoom"
-											style={{ maxWidth: 80 }}
-											alt="{{$blog->photo}}"
-										/>
-									</td>
-									<td>
-										@if($blog-&gt;status=='active')
-										<span className="badge badge-success">
-											{"{"}
-											{"{"}$blog-&gt;status{"}"}
-											{"}"}
-										</span>
-										@else
-										<span className="badge badge-warning">
-											{"{"}
-											{"{"}$blog-&gt;status{"}"}
-											{"}"}
-										</span>
-										@endif
-									</td>
-									<td>
-										<a
-											href="/blog/edit"
-											className="btn btn-primary btn-sm float-left mr-1"
-											style={{ height: 30, width: 30, borderRadius: "50%" }}
-											data-toggle="tooltip"
-											title="edit"
-											data-placement="bottom"
-										>
-											<i className="fas fa-edit" />
-										</a>
-										<form
-											method="POST"
-											action="{{route('account.delete.blog',[$blog->id])}}"
-										>
-											<button
-												className="btn btn-danger btn-sm dltBtn"
-												data-id="{{$blog->id}}"
-												style={{ height: 30, width: 30, borderRadius: "50%" }}
-												data-toggle="tooltip"
-												data-placement="bottom"
-												title="Delete"
-											>
-												<i className="fas fa-trash-alt" />
-											</button>
-										</form>
-									</td>
-								</tr>
+								{blog.map((item) => {
+									return (
+										<tr>
+											<td key ={item.id} >{item.id}</td>
+											<td>{item.title}</td>
+											<td>nai</td>
+											<td>{item.tags}</td>
+											<td>nai</td>
+											<td>
+												<img
+													src="/"
+													className="img-fluid zoom"
+													style={{ maxWidth: 80 }}
+													alt={item.photo}
+												/>
+											</td>
+											<td>
+												{/* if(item.status== "active")
+												{
+													<span className="badge badge-success">
+														{item.status}
+													</span>
+												}
+												else
+												{
+													<span className="badge badge-warning">
+														{item.status}
+													</span>
+												} */}nope
+											</td>
+											<td>
+												<a
+													href="/blog/edit"
+													className="btn btn-primary btn-sm float-left mr-1"
+													style={{ height: 30, width: 30, borderRadius: "50%" }}
+													data-toggle="tooltip"
+													title="edit"
+													data-placement="bottom"
+												>
+													<i className="fas fa-edit" />
+												</a>
+												<form
+													method="POST"
+													action="{{route('account.delete.blog',[$blog->id])}}"
+												>
+													<button
+														className="btn btn-danger btn-sm dltBtn"
+														data-id="{{$blog->id}}"
+														style={{
+															height: 30,
+															width: 30,
+															borderRadius: "50%",
+														}}
+														data-toggle="tooltip"
+														data-placement="bottom"
+														title="Delete"
+													>
+														<i className="fas fa-trash-alt" />
+													</button>
+												</form>
+											</td>
+										</tr>
+									)
+								})}
 							</tbody>
 						</table>
-						<span style={{ float: "right" }}>
-							{"{"}
-							{"{"}$blogs-&gt;links(){"}"}
-							{"}"}
-						</span>
-						@else
+						<span style={{ float: "right" }}>{blog.link}</span>
+						{/* @else
 						<h6 className="text-center">
 							No blogs found!!! Please create Post
 						</h6>
-						@endif
+						@endif */}
 					</div>
 				</div>
 			</div>

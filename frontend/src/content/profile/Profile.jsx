@@ -1,6 +1,21 @@
-import React from "react";
+
+import React, {useEffect,useState} from "react";
+import Axios from "axios";
 
 const Profile = () => {
+	const [user,setUser] = useState([]);
+	useEffect(() => {
+		loadUser();
+	}, []);
+	const loadUser = async () => {
+		  await Axios.get(`http://127.0.0.1:8000/api/profile`)
+		 .then(
+			response => setUser(response.data)
+		 )
+		 .catch(error =>{
+			 return error;
+		 });
+	};
 	return (
 		<>
 			<div className="main-body">
@@ -36,22 +51,17 @@ const Profile = () => {
 							<div className="card-body">
 								<div className="d-flex flex-column align-items-center text-center">
 									<img
-										src="{{ asset('/upload/user_image')}}/{{ $LoggedUserInfo->profile_img}}"
-										alt="{{ $LoggedUserInfo['type'] }}"
+										src="{user.profile_img}"
+										alt={user.type}
 										className="img-circle elevation-2"
 										width={150}
 									/>
 									<div className="mt-3">
 										<h4>
-											{" "}
-											{"{"}
-											{"{"} $LoggedUserInfo['username'] {"}"}
-											{"}"}
+											{user.fullname}
 										</h4>
 										<p className="text-muted font-size-sm">
-											{"{"}
-											{"{"} $LoggedUserInfo['type'] {"}"}
-											{"}"}
+											{user.type}
 										</p>
 										<a
 											href="/profile/edit"
@@ -86,9 +96,7 @@ const Profile = () => {
 										Website
 									</h6>
 									<span className="text-secondary">
-										{"{"}
-										{"{"} $LoggedUserInfo-&gt;webside {"}"}
-										{"}"}
+										{user.website}
 									</span>
 								</li>
 								<li className="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -110,9 +118,7 @@ const Profile = () => {
 										Facebook
 									</h6>
 									<span className="text-secondary">
-										{"{"}
-										{"{"} $LoggedUserInfo-&gt;facebook {"}"}
-										{"}"}
+										{user.facebook}
 									</span>
 								</li>
 							</ul>
@@ -126,9 +132,7 @@ const Profile = () => {
 										<h6 className="mb-0">Full Name</h6>
 									</div>
 									<div className="col-sm-9 text-secondary">
-										{"{"}
-										{"{"}$LoggedUserInfo-&gt;fullname{"}"}
-										{"}"}
+										{user.fullname}
 									</div>
 								</div>
 								<hr />
@@ -137,9 +141,7 @@ const Profile = () => {
 										<h6 className="mb-0">Email</h6>
 									</div>
 									<div className="col-sm-9 text-secondary">
-										{"{"}
-										{"{"}$LoggedUserInfo-&gt;email{"}"}
-										{"}"}
+										{user.email}
 									</div>
 								</div>
 								<hr />
@@ -148,9 +150,7 @@ const Profile = () => {
 										<h6 className="mb-0">Phone</h6>
 									</div>
 									<div className="col-sm-9 text-secondary">
-										{"{"}
-										{"{"}$LoggedUserInfo-&gt;phone{"}"}
-										{"}"}
+										{user.phone}
 									</div>
 								</div>
 								<hr />
@@ -159,9 +159,7 @@ const Profile = () => {
 										<h6 className="mb-0">User Name</h6>
 									</div>
 									<div className="col-sm-9 text-secondary">
-										{"{"}
-										{"{"}$LoggedUserInfo-&gt;username{"}"}
-										{"}"}
+										{user.username}
 									</div>
 								</div>
 								<hr />
@@ -170,9 +168,7 @@ const Profile = () => {
 										<h6 className="mb-0">Address</h6>
 									</div>
 									<div className="col-sm-9 text-secondary">
-										{"{"}
-										{"{"}$LoggedUserInfo-&gt;address{"}"}
-										{"}"}
+										{user.address}
 									</div>
 								</div>
 								<hr />
@@ -181,9 +177,7 @@ const Profile = () => {
 										<h6 className="mb-0">Blood Group</h6>
 									</div>
 									<div className="col-sm-9 text-secondary">
-										{"{"}
-										{"{"}$LoggedUserInfo-&gt;bloodgroup{"}"}
-										{"}"}
+										{user.bloodgroup}
 									</div>
 								</div>
 								<hr />
@@ -192,9 +186,7 @@ const Profile = () => {
 										<h6 className="mb-0">Gender</h6>
 									</div>
 									<div className="col-sm-9 text-secondary">
-										{"{"}
-										{"{"}$LoggedUserInfo-&gt;gender{"}"}
-										{"}"}
+										{user.gender}
 									</div>
 								</div>
 								<hr />

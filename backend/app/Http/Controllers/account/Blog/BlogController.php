@@ -14,9 +14,8 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $data = ['LoggedUserInfo'=>user::where('id','=', session('LoggedUser'))->first()];
         $blogs=Blog::getAllBlog();
-        return response()->json([$data,'blogs'=>$blogs],200);
+        return response()->json([$blogs],200);
     }
 
     /**

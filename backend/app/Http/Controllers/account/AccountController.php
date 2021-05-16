@@ -31,8 +31,8 @@ class AccountController extends Controller
     }
 
     public function ulist(){
-        $userlist = DB::select('select * from users');
-        return response()->json(['userlist'=>$userlist]);
+        // $userlist = DB::select('select * from users');
+        return response()->json(DB::select('select * from users'));
     }
 
 
@@ -95,7 +95,7 @@ class AccountController extends Controller
         //
     }
     public function profile(Request $req){
-        $data = ['LoggedUserInfo'=>user::where('id','=', session('LoggedUser'))->first()];
-        return response()->json([$data],200);
+        $data = user::where('id','=', '3')->first();
+        return response()->json($data,200);
     }
 }

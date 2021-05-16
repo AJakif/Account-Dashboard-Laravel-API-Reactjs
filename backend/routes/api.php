@@ -74,12 +74,11 @@ Route::post('/Blog/{slug}/comment',[BlogCommentController::class,'store'])->name
 
 
     //Accont ->profile
-    Route::get("/dashboard/profile",[AccountController::class,'profile'])->name('account.profile');
-    Route::get("/dashboard/editprofile/{id}",[AccountController::class,'edit'])->name('account.edit');
-    Route::post("/dashboard/editprofile/{id}",[AccountController::class,'update'])->name('account.update');
+    Route::get("/profile",[AccountController::class,'profile'])->name('account.profile');
+    Route::post("/editprofile/{id}",[AccountController::class,'update'])->name('account.update');
 
     //Account ->User List
-    Route::get("/dashboard/Userlist",[AccountController::class,'ulist']);
+    Route::get("/Userlist",[AccountController::class,'ulist']);
 
     //Account ->Coupon
     Route::post('/coupon-store',[CouponController::class,'couponStore'])->name('coupon-store');

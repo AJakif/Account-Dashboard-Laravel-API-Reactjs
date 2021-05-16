@@ -1,16 +1,21 @@
-import React, { useState } from "react";
-import Axios from "axios"
+import React, { useState, useEffect } from "react";
+import Axios from "axios";
 
 const User = () => {
-	const [data,setData]=useState("");
-		Axios.get("http://127.0.0.1:8000/api/dashboard/Userlist")
-		.then(
-			(response)=>{
-				console.log(response)
-				setData(response.userlist)
-			}
-		);
-	
+	const [user, setUser] = useState([]);
+	useEffect(() => {
+		loadUser();
+	}, []);
+	const loadUser = async () => {
+		  await Axios.get(`http://127.0.0.1:8000/api/Userlist`)
+		 .then(
+			response => setUser(response.data)
+		 )
+		 .catch(error =>{
+			 return error;
+		 });
+	};
+
 	return (
 		<>
 			<div>
@@ -59,7 +64,8 @@ const User = () => {
 												</tr>
 											</thead>
 											<tbody>
-												{data.map((item) => 
+												{user.map((item) => {
+													return(
 													<tr>
 														<td key={item.id}>{item.fullname}</td>
 														<td>{item.username}</td>
@@ -67,9 +73,12 @@ const User = () => {
 														<td>{item.phone}</td>
 														<td>{item.bloodgroup}</td>
 														<td>{item.facebook}</td>
-														<td>{item.role}</td>
+														<td>{item.type}</td>
 													</tr>
-												)}
+													)
+												})
+												}
+												
 											</tbody>
 										</table>
 									</div>
