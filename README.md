@@ -14,7 +14,7 @@
 
 ### Screenshot
 
-![Dashboard](./screeshots/1. dashboard.jpg)
+![Dashboard](./screenshots/1. dashboard.JPG)
 
 ![Profile](./screeshots/2. Profile.jpg)
 
