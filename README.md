@@ -14,13 +14,14 @@
 
 ### Screenshot
 
-![Dashboard](./screenshots/1. dashboard.JPG)
+![Dashboard](./screenshots/dashboard.jpg)
 
-![Profile](./screeshots/2. Profile.jpg)
+![Profile](./screenshots/Profile.jpg)
 
-![Edit Profile](./screeshots/3. Edit Profile.jpg)
+![Edit Profile](./screenshots/Edit Profile.jpg)
 
-![Blog List](./screeshots/4. Blog List.jpg)
+![Blog List](./screenshots/Blog List.jpg)
+
 
 
 
