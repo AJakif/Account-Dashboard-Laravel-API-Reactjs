@@ -1,16 +1,13 @@
 import React from "react";
 
 const CreateBlog = () => {
+	
 	return (
 		<>
 			<div className="card">
 				<h5 className="card-header">Add Blog</h5>
 				<div className="card-body">
-					<form
-						method="post"
-						action="{{route('account.store.blog')}}"
-						encType="multipart/form-data"
-					>
+					
 						<div className="form-group">
 							<label htmlFor="inputTitle" className="col-form-label">
 								Title <span className="text-danger">*</span>
@@ -120,7 +117,6 @@ const CreateBlog = () => {
 								Submit
 							</button>
 						</div>
-					</form>
 				</div>
 			</div>
 		</>

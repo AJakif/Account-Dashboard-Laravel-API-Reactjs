@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\account;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Employeeattendance;
@@ -17,9 +18,8 @@ class EmpattendanceController extends Controller
     public function index()
     {
         
-        $data = ['LoggedUserInfo'=>user::where('id','=', session('LoggedUser'))->first()];
-        $data['alldata'] = Employeeattendance::select('date')->groupBy('date')->orderBy('id','DESC')->get();
-        return response()->json([$data],200);
+        $data = Employeeattendance::select('date')->groupBy('date')->orderBy('id','DESC')->get();
+        return response()->json($data,200);
     }
 
     /**
@@ -113,8 +113,8 @@ class EmpattendanceController extends Controller
      */
     public function details($date)
     {
-        $data = ['LoggedUserInfo'=>user::where('id','=', session('LoggedUser'))->first()];
-        $data['alldata'] = Employeeattendance::where('date',$date)->get();
-        return response()->json([$data],200);
+    
+        $data = Employeeattendance::where('date',$date)->get();
+        return response()->json($data,200);
     }
 }

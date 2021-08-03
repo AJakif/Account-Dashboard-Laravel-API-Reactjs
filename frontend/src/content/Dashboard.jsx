@@ -1,6 +1,23 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Dashboard = () => {
+	const [dash,setDash] = useState([]);
+
+	useEffect(() => {
+		loadDash();
+	}, []);
+
+	const loadDash = async () => {
+		  await axios.get(`http://127.0.0.1:8000/api/dashboard`)
+		 .then(
+			response => setDash(response.data)
+		 )
+		 .catch(error =>{
+			 return error;
+		 });
+	};
+
 	return (
 		<>
 			<div>
@@ -67,9 +84,15 @@ const Dashboard = () => {
 								{/* small box */}
 								<div className="small-box bg-success">
 									<div className="inner">
+									{dash.map((item) => {
+										return(
 										<h3>
-											5
+										
+											{item.total}
+										
 										</h3>
+										)
+										})}
 										<p>Total Users</p>
 									</div>
 									<div className="icon">

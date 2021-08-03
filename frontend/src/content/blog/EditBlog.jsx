@@ -1,6 +1,22 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const EditBlog = () => {
+	const [blog, setBlog] = useState([]);
+	useEffect(() => {
+		loadBlog();
+	}, []);
+
+	const loadBlog = async () => {
+		await axios
+			.get(`http://127.0.0.1:8000/api/blog/edit/1`)
+			.then(
+				response => setBlog(response.data)
+				
+			).catch(error => {
+				return error;
+			});
+	};
 	return (
 		<>
 			<div className="card">
@@ -20,7 +36,7 @@ const EditBlog = () => {
 								type="text"
 								name="title"
 								placeholder="Enter title"
-								defaultValue="{{$blog->title}}"
+								defaultValue={blog.blog.title}
 								className="form-control"
 							/>
 						</div>
@@ -32,7 +48,7 @@ const EditBlog = () => {
 								className="form-control"
 								id="quote"
 								name="quote"
-								defaultValue={"{{$blog->quote}}"}
+								defaultValue={blog.blog.quote}
 							/>
 						</div>
 						<div className="form-group">
@@ -43,7 +59,7 @@ const EditBlog = () => {
 								className="form-control"
 								id="summary"
 								name="summary"
-								defaultValue={"{{$blog->summary}}"}
+								defaultValue={blog.blog.summary}
 							/>
 						</div>
 						<div className="form-group">
@@ -54,7 +70,7 @@ const EditBlog = () => {
 								className="form-control"
 								id="description"
 								name="description"
-								defaultValue={"{{$blog->description}}"}
+								defaultValue={blog.blog.description}
 							/>
 						</div>
 						<div className="form-group">
@@ -80,9 +96,8 @@ const EditBlog = () => {
 						<div className="form-group">
 							<label htmlFor="added_by">Author</label>
 							<select name="added_by" className="form-control">
-								<option value="{{ $LoggedUserInfo['id'] }}">
-									{" "}
-									$LoggedUserInfo['username']
+								<option value={blog}>
+								
 								</option>
 							</select>
 						</div>

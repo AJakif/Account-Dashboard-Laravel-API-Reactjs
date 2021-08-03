@@ -17,9 +17,8 @@ class CouponController extends Controller
      */
     public function index()
     {
-        $data = ['LoggedUserInfo'=>user::where('id','=', session('LoggedUser'))->first()];
         $coupon=Coupon::orderBy('id','DESC')->paginate('10');
-        return response()->json(['data'=>$data,'coupon'=>$coupon],200);
+        return response()->json($coupon,200);
     }
 
     /**

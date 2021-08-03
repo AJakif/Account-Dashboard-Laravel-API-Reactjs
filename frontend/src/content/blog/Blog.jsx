@@ -11,11 +11,26 @@ const Blog = () => {
 		await Axios
 			.get(`http://127.0.0.1:8000/api/blog`)
 			.then(
-				response => setBlog(response.data)
+				response => setBlog(response.data.data)
+				
 			).catch(error => {
 				return error;
 			});
 	};
+
+	const onClickDelete = async (id) => {
+
+		// var yes = confirm("are you sure to delete this item?");
+		// if (yes === true){
+	
+			const urlDelete = "http://127.0.0.1:8000/api/blog/delete/"+id
+			 await Axios.delete(urlDelete)
+			.then(response=> { return response.data })
+			.catch(error =>{ return error })
+		// }
+	
+	  }
+
 	return (
 		<>
 			<div className="card shadow mb-4">
@@ -71,9 +86,10 @@ const Blog = () => {
 										<tr>
 											<td key ={item.id} >{item.id}</td>
 											<td>{item.title}</td>
-											<td>nai</td>
+											<td>{item.cat_info.title}</td>
+											
 											<td>{item.tags}</td>
-											<td>nai</td>
+											<td>{item.author_info.username}</td>
 											<td>
 												<img
 													src="/"
@@ -83,18 +99,15 @@ const Blog = () => {
 												/>
 											</td>
 											<td>
-												{/* if(item.status== "active")
-												{
-													<span className="badge badge-success">
+												{item.status === "active" 
+												?<span className="badge badge-success">
 														{item.status}
-													</span>
-												}
-												else
-												{
-													<span className="badge badge-warning">
-														{item.status}
-													</span>
-												} */}nope
+												</span>
+												:<span className="badge badge-warning">
+												{item.status}
+										</span>
+													
+												} 
 											</td>
 											<td>
 												<a
@@ -107,10 +120,7 @@ const Blog = () => {
 												>
 													<i className="fas fa-edit" />
 												</a>
-												<form
-													method="POST"
-													action="{{route('account.delete.blog',[$blog->id])}}"
-												>
+												
 													<button
 														className="btn btn-danger btn-sm dltBtn"
 														data-id="{{$blog->id}}"
@@ -122,10 +132,11 @@ const Blog = () => {
 														data-toggle="tooltip"
 														data-placement="bottom"
 														title="Delete"
+														onClick={()=>onClickDelete(item.id)}
 													>
 														<i className="fas fa-trash-alt" />
 													</button>
-												</form>
+												
 											</td>
 										</tr>
 									)

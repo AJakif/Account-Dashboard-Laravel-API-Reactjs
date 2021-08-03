@@ -6,10 +6,8 @@ const Ccreate = () => {
 			<div className="card">
 				<h5 className="card-header">Add Coupon</h5>
 				<div className="card-body">
-					<form method="post" action="{{route('coupon.store')}}">
-						{"{"}
-						{"{"}csrf_field(){"}"}
-						{"}"}
+					
+						
 						<div className="form-group">
 							<label htmlFor="inputTitle" className="col-form-label">
 								Coupon Code <span className="text-danger">*</span>
@@ -19,7 +17,6 @@ const Ccreate = () => {
 								type="text"
 								name="code"
 								placeholder="Enter Coupon Code"
-								defaultValue="{{old('code')}}"
 								className="form-control"
 							/>
 						</div>
@@ -41,7 +38,6 @@ const Ccreate = () => {
 								type="number"
 								name="value"
 								placeholder="Enter Coupon value"
-								defaultValue="{{old('value')}}"
 								className="form-control"
 							/>
 						</div>
@@ -62,7 +58,6 @@ const Ccreate = () => {
 								Submit
 							</button>
 						</div>
-					</form>
 				</div>
 			</div>
 		</>

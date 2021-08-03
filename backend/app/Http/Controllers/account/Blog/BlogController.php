@@ -15,7 +15,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs=Blog::getAllBlog();
-        return response()->json([$blogs],200);
+        return response()->json($blogs,200);
     }
 
     /**
@@ -114,12 +114,11 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        $data = ['LoggedUserInfo'=>user::where('id','=', session('LoggedUser'))->first()];
         $blog=Blog::findOrFail($id);
         $categories=BlogCategory::get();
         $tags=BlogTag::get();
         $users=User::get();
-        return response()->json([$data,'blog'=>$blog,'blogcatagory'=>$categories,'blogtags'=>$tags,'users'=>$users],200);
+        return response()->json(['blog'=>$blog,'blogcatagory'=>$categories,'blogtags'=>$tags,'users'=>$users],200);
     }
 
     /**

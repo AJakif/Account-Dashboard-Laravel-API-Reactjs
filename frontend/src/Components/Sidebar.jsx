@@ -52,16 +52,13 @@ const Sidebar = () => {
 								</a>
 								<ul className="nav nav-treeview">
 									<li className="nav-item">
-										<a
-											href="/profile/edit"
-											className="nav-link "
-										>
+										<a href="/profile/edit" className="nav-link ">
 											<i className="fas fa-user-edit" />
 											<p>Edit Profile</p>
 										</a>
 									</li>
 									<li className="nav-item">
-										<a href="{{ route('auth.logout') }}" className="nav-link">
+										<a href="/logout" className="nav-link">
 											<i className="fas fa-sign-out-alt" />
 											<p>Logout</p>
 										</a>
@@ -85,34 +82,25 @@ const Sidebar = () => {
 										</a>
 									</li>
 									<li className="nav-item">
-										<a
-											href="/blog/create"
-											className="nav-link "
-										>
+										<a href="/blog/create" className="nav-link ">
 											<i className="far fa-circle nav-icon" />
 											<p>Add Blog</p>
 										</a>
 									</li>
 									<li className="nav-item">
-										<a
-											href="{{ route('account.blog.tag') }}"
-											className="nav-link "
-										>
+										<a href="/blog/tag" className="nav-link ">
 											<i className="fas fa-tag nav-icon" />
 											<p>Blog Tag</p>
 										</a>
 									</li>
 									<li className="nav-item">
-										<a
-											href="{{ route('account.blog.cat') }}"
-											className="nav-link "
-										>
+										<a href="/blog/catagory" className="nav-link ">
 											<i className="far fa-circle nav-icon" />
 											<p>Blog Category</p>
 										</a>
 									</li>
 									<li className="nav-item">
-										<a href="{{route('account.comment')}}" className="nav-link">
+										<a href="/blog/comment" className="nav-link">
 											<i className="nav-icon fas fa-comments" />
 											<p>Comments</p>
 										</a>
@@ -155,10 +143,7 @@ const Sidebar = () => {
 								</a>
 								<ul className="nav nav-treeview">
 									<li className="nav-item">
-										<a
-											href="/employee"
-											className="nav-link "
-										>
+										<a href="/employee" className="nav-link ">
 											<i className="far fa-circle nav-icon" />
 											<p>Employee List</p>
 										</a>
@@ -175,10 +160,7 @@ const Sidebar = () => {
 								</a>
 								<ul className="nav nav-treeview">
 									<li className="nav-item">
-										<a
-											href="{{ route('account.employee.salary.index') }}"
-											className="nav-link "
-										>
+										<a href="/salary" className="nav-link ">
 											<i className="far fa-circle nav-icon" />
 											<p>Employee Salary</p>
 										</a>
@@ -195,10 +177,7 @@ const Sidebar = () => {
 								</a>
 								<ul className="nav nav-treeview">
 									<li className="nav-item">
-										<a
-											href="/employee/attendance"
-											className="nav-link "
-										>
+										<a href="/employee/attendance" className="nav-link ">
 											<i className="far fa-circle nav-icon" />
 											<p>Employee Attendance</p>
 										</a>
@@ -206,10 +185,7 @@ const Sidebar = () => {
 								</ul>
 								<ul className="nav nav-treeview">
 									<li className="nav-item">
-										<a
-											href="/employee/leave"
-											className="nav-link "
-										>
+										<a href="/employee/leave" className="nav-link ">
 											<i className="far fa-circle nav-icon" />
 											<p>Employee Leave</p>
 										</a>
@@ -226,10 +202,7 @@ const Sidebar = () => {
 								</a>
 								<ul className="nav nav-treeview">
 									<li className="nav-item">
-										<a
-											href="{{ route('account.employee.monthlysalary') }}"
-											className="nav-link "
-										>
+										<a href="/monthlysalary" className="nav-link ">
 											<i className="far fa-circle nav-icon" />
 											<p>Monthly Salary</p>
 										</a>
@@ -237,10 +210,7 @@ const Sidebar = () => {
 								</ul>
 								<ul className="nav nav-treeview">
 									<li className="nav-item">
-										<a
-											href="{{ route('account.employee.salary.pay') }}"
-											className="nav-link "
-										>
+										<a href="/salary/pay" className="nav-link ">
 											<i className="far fa-circle nav-icon" />
 											<p>Pay Monthly Salary</p>
 										</a>
@@ -248,37 +218,31 @@ const Sidebar = () => {
 								</ul>
 								<ul className="nav nav-treeview">
 									<li className="nav-item">
-										<a
-											href="{{ route('account.employee.salary.view') }}"
-											className="nav-link "
-										>
+										<a href="/salary/view" className="nav-link ">
 											<i className="far fa-circle nav-icon" />
 											<p>Monthly Salary Log</p>
 										</a>
 									</li>
 								</ul>
+
+								<li className="nav-item">
+									<a href="/extracost" className="nav-link ">
+										<i className="fas fa-dollar-sign" />
+										<p>Extra Cost</p>
+									</a>
+								</li>
+
+								<li className="nav-item">
+									<a href="/order" className="nav-link ">
+										<i className="fas fa-dollar-sign" />
+										<p>Order</p>
+									</a>
+								</li>
 							</li>
-							<li className="nav-item">
-								<a
-									href="{{ route('account.extracost') }}"
-									className="nav-link "
-								>
-									<i className="fas fa-dollar-sign" />
-									<p>Extra Cost</p>
-								</a>
-							</li>
-							<li className="nav-item">
-								<a href="{{ route('account.order') }}" className="nav-link ">
-									<i className="fas fa-dollar-sign" />
-									<p>Order</p>
-								</a>
-							</li>
+
 							<li className="nav-header">Reports</li>
 							<li className="nav-item">
-								<a
-									href="{{ route('account.MonthlyProfit.show') }}"
-									className="nav-link "
-								>
+								<a href="/monthlyprofit" className="nav-link ">
 									<i className="far fa-circle nav-icon" />
 									<p>Monthly Profit</p>
 								</a>

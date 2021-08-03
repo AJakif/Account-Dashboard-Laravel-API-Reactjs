@@ -1,6 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios"
+//import {useHistory} from "react-router-dom"
 
 const Editprofile = () => {
+	const [user,setUser] = useState([]);
+	const [fullname,SetFullname]=useState("")
+	const [username,SetUsername]=useState("")
+	const [email,SetEmail]=useState("")
+	const [address,SetAddress]=useState("")
+	const [phone,SetPhone]=useState("")
+
+	useEffect(() => {
+		loadUser();
+	}, []);
+
+	const loadUser = async () => {
+		  await axios.get(`http://127.0.0.1:8000/api/profile`)
+		 .then(
+			response =>setUser(response.data)
+		 )
+		 .catch(error =>{
+			 return error;
+		 });
+	};
+
+
+
+
+//const history = useHistory();
+   async function submit()
+    {
+		await axios.put('http://127.0.0.1:8000/api/editprofile/3',{
+			fullname,username,email,address,phone
+		  })
+		  .then((response) => {
+			console.log(response);
+		  }, (error) => {
+			console.log(error);
+		  });
+   
+//history.push("/profile")
+}
 	return (
 		<>
 			<div>
@@ -31,12 +71,7 @@ const Editprofile = () => {
 					</div>
 					{/* /.container-fluid */}
 				</div>
-				<form
-					action="{{ route('account.update',$LoggedUserInfo['id'] )}}"
-					method="post"
-					encType="multipart/form-data"
-				>
-					@csrf
+				
 					<section className="content">
 						<div className="container-fluid">
 							<div className="row">
@@ -55,16 +90,13 @@ const Editprofile = () => {
 													<img
 														src="{{ asset('/upload/user_image')}}/{{ $LoggedUserInfo->profile_img}}"
 														className="img-circle elevation-2"
-														alt="{{ $LoggedUserInfo['type'] }}"
+														alt={user.type}
 														width={150}
 													/>
 												</div>
 												<div className="mt-3">
 													<h4>
-														{" "}
-														{"{"}
-														{"{"} $LoggedUserInfo['username'] {"}"}
-														{"}"}
+														{username}
 													</h4>
 												</div>
 												<div className="form-group">
@@ -109,7 +141,8 @@ const Editprofile = () => {
 													id="fullname"
 													name="fullname"
 													placeholder="Fullname"
-													defaultValue="{{ $LoggedUserInfo['fullname']}}"
+													defaultValue={fullname}
+													onChange={(e)=>SetFullname(e.target.defaultValue)}
 												/>
 											</div>
 											<div className="input-group mb-3">
@@ -122,7 +155,8 @@ const Editprofile = () => {
 													id="username"
 													name="username"
 													placeholder="Username"
-													defaultValue="{{ $LoggedUserInfo['username']}}"
+													value={user.username}
+													onChange={(e)=>SetUsername(e.target.value)}
 												/>
 											</div>
 											<div className="input-group mb-3">
@@ -137,7 +171,8 @@ const Editprofile = () => {
 													id="exampleInputEmail1"
 													name="email"
 													placeholder="email"
-													defaultValue="{{ $LoggedUserInfo['email']}}"
+													value={user.email}
+													onChange={(e)=>SetEmail(e.target.value)}
 												/>
 											</div>
 											<div className="input-group mb-3">
@@ -152,7 +187,8 @@ const Editprofile = () => {
 													id="exampleInputphone"
 													name="phone"
 													placeholder="phone"
-													defaultValue="{{ $LoggedUserInfo['phone']}}"
+													value={user.phone}
+													onChange={(e)=>SetPhone(e.target.value)}
 												/>
 											</div>
 											<div className="input-group mb-3">
@@ -167,7 +203,8 @@ const Editprofile = () => {
 													id="address"
 													name="address"
 													placeholder="address"
-													defaultValue="{{ $LoggedUserInfo['address']}}"
+													value={user.address}
+													onChange={(e)=>SetAddress(e.target.value)}
 												/>
 											</div>
 										</div>
@@ -175,13 +212,13 @@ const Editprofile = () => {
 								</div>
 							</div>
 							<div className="card-footer">
-								<button type="submit" name="update" className="btn btn-primary">
+								<button type="submit"  onClick={submit} name="update" className="btn btn-primary">
 									Submit
 								</button>
 							</div>
 						</div>
 					</section>
-				</form>
+				
 			</div>
 		</>
 	);

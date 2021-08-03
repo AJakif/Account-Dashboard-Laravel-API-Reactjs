@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const Cshow = () => {
+	const [coupon, setCoupon] = useState([]);
+	useEffect(() => {
+		loadCoupon();
+	}, []);
+	const loadCoupon = async () => {
+		await axios
+			.get(`http://127.0.0.1:8000/api/coupon`)
+			.then(response => setCoupon(response.data.data))
+			.catch(error => {
+				return error;
+			});
+	};
 	return (
 		<>
 			<div className="card shadow mb-4">
@@ -9,7 +22,7 @@ const Cshow = () => {
 						Coupon List
 					</h6>
 					<a
-						href="{{route('coupon.create')}}"
+						href="/coupon/create"
 						className="btn btn-primary btn-sm float-right"
 						data-toggle="tooltip"
 						data-placement="bottom"
@@ -20,7 +33,6 @@ const Cshow = () => {
 				</div>
 				<div className="card-body">
 					<div className="table-responsive">
-						@if(count($coupons)&gt;0) @foreach($coupons as $coupon) @endforeach
 						<table
 							className="table table-bordered"
 							id="banner-dataTable"
@@ -48,97 +60,76 @@ const Cshow = () => {
 								</tr>
 							</tfoot>
 							<tbody>
-								<tr>
-									<td>
-										{"{"}
-										{"{"}$coupon-&gt;id{"}"}
-										{"}"}
-									</td>
-									<td>
-										{"{"}
-										{"{"}$coupon-&gt;code{"}"}
-										{"}"}
-									</td>
-									<td>
-										@if($coupon-&gt;type=='fixed')
-										<span className="badge badge-primary">
-											{"{"}
-											{"{"}$coupon-&gt;type{"}"}
-											{"}"}
-										</span>
-										@else
-										<span className="badge badge-warning">
-											{"{"}
-											{"{"}$coupon-&gt;type{"}"}
-											{"}"}
-										</span>
-										@endif
-									</td>
-									<td>
-										@if($coupon-&gt;type=='fixed') ${"{"}
-										{"{"}number_format($coupon-&gt;value,2){"}"}
-										{"}"}
-										@else
-										{"{"}
-										{"{"}$coupon-&gt;value{"}"}
-										{"}"}% @endif
-									</td>
-									<td>
-										@if($coupon-&gt;status=='active')
-										<span className="badge badge-success">
-											{"{"}
-											{"{"}$coupon-&gt;status{"}"}
-											{"}"}
-										</span>
-										@else
-										<span className="badge badge-warning">
-											{"{"}
-											{"{"}$coupon-&gt;status{"}"}
-											{"}"}
-										</span>
-										@endif
-									</td>
-									<td>
-										<a
-											href="{{route('coupon.edit',$coupon->id)}}"
-											className="btn btn-primary btn-sm float-left mr-1"
-											style={{ height: 30, width: 30, borderRadius: "50%" }}
-											data-toggle="tooltip"
-											title="edit"
-											data-placement="bottom"
-										>
-											<i className="fas fa-edit" />
-										</a>
-										<form
-											method="POST"
-											action="{{route('coupon.destroy',[$coupon->id])}}"
-										>
-											@csrf @method('delete')
-											<button
-												className="btn btn-danger btn-sm .dltBtn"
-												data-id="{{$coupon-"
-											>
-												id{"}"}
-												{"}"} style="height:30px; width:30px;border-radius:50%"
-												data-toggle="tooltip" data-placement="bottom"
-												title="Delete"&gt;
-												<i className="fas fa-trash-alt" />
-											</button>
-										</form>
-									</td>
-								</tr>
+								{coupon.map((item) => {
+									return (
+										<tr>
+											<td>{item.id}</td>
+											<td>{item.code}</td>
+											<td>
+												{item.type === "fixed" ? 
+													<span className="badge badge-primary">
+														{item.type}
+													</span>
+												 : 
+													<span className="badge badge-warning">
+														{item.type}
+													</span>
+												}
+												</td>
+											
+											
+												{
+												item.type ==='fixed'
+												?
+												<td>{item.value}</td>
+												:<td>
+													{item.value}
+												</td>
+												}
+											
+											<td>
+												{item.status === "active" ? 
+													<span className="badge badge-success">
+														{item.status}
+													</span>
+												 : 
+													<span className="badge badge-warning">
+														{item.status}
+													</span>
+												}
+											</td>
+											<td>
+												<a
+													href="/coupon/edit/{item.id}"
+													className="btn btn-primary btn-sm float-left mr-1"
+													style={{ height: 30, width: 30, borderRadius: "50%" }}
+													data-toggle="tooltip"
+													title="edit"
+													data-placement="bottom"
+												>
+													<i className="fas fa-edit" />
+												</a>
+
+													<button
+														classname="btn btn-danger btn-sm .dltBtn"
+														data-id={item.id}
+														style={{
+															height: 30,
+															width: 30,
+															borderRadius: "50%",
+														}}
+														data-toggle="tooltip"
+														data-placement="bottom"
+														title="Delete"
+													>
+														<i classname="fas fa-trash-alt"></i>
+													</button>
+												
+											</td>
+										</tr>
+									)})}
 							</tbody>
 						</table>
-						<span style={{ float: "right" }}>
-							{"{"}
-							{"{"}$coupons-&gt;links(){"}"}
-							{"}"}
-						</span>
-						@else
-						<h6 className="text-center">
-							No Coupon found!!! Please create coupon
-						</h6>
-						@endif
 					</div>
 				</div>
 			</div>

@@ -7,7 +7,7 @@ const Footer = () => {
 				<strong>Copyright © 2021-infinite </strong>
 				<div className="float-right d-none d-sm-inline-block">
 					<a href="/">
-						<strong>TRAVEL</strong>org
+						<strong>Account</strong>-org
 					</a>
 					. All rights reserved.
 				</div>

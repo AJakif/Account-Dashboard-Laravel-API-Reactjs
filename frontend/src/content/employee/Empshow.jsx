@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios"
 
 const Empshow = () => {
+
+	const [emp, setEmp] = useState([]);
+	useEffect(() => {
+		loadEmp();
+	}, []);
+	const loadEmp = async () => {
+		await axios
+			.get(`http://127.0.0.1:8000/api/Employee/view`)
+			.then(response => setEmp(response.data))
+			.catch(error => {
+				return error;
+			});
+	};
+
 	return (
 		<>
 			<div className="card shadow mb-4">
@@ -45,7 +60,6 @@ const Empshow = () => {
 										</a>
 									</div>
 									<div className="card-body">
-										@foreach($alldata as $key =&gt; $value) @endforeach
 										<table
 											id="example2"
 											className="table table-bordered table-hover table-striped"
@@ -75,42 +89,29 @@ const Empshow = () => {
 												</tr>
 											</tfoot>
 											<tbody>
-												<tr className="{{$value -> id}}">
+												{emp.map((item,i)=>{
+													return(
+														<tr className="{item.id}">
 													<td>
-														{"{"}
-														{"{"}$key+1{"}"}
-														{"}"}
+														{i+1}
 													</td>
 													<td>
-														{"{"}
-														{"{"}$value -&gt; fullname{"}"}
-														{"}"}
+														{item.fullname}
 													</td>
 													<td>
-														{"{"}
-														{"{"}$value -&gt; phone{"}"}
-														{"}"}
+														{item.phone}
 													</td>
 													<td>
-														{"{"}
-														{"{"}$value -&gt; address{"}"}
-														{"}"}
+														{item.address}
 													</td>
 													<td>
-														{"{"}
-														{"{"}date('d-m-Y',strtotime($value -&gt; join_date))
-														{"}"}
-														{"}"}
+														{item.join_date}
 													</td>
 													<td>
-														{"{"}
-														{"{"}$value -&gt; salary{"}"}
-														{"}"}
+														{item.salary}
 													</td>
 													<td>
-														{"{"}
-														{"{"}$value -&gt; type{"}"}
-														{"}"}
+														{item.type}
 													</td>
 													<td>
 														<a
@@ -127,14 +128,9 @@ const Empshow = () => {
 														>
 															<i className="fas fa-edit" />
 														</a>
-														<form
-															method="POST"
-															action="{{ route('account.employee.delete',[$value -> id])}}"
-														>
-															@csrf @method('delete')
-															<button
+														<button
 																className="btn btn-danger btn-sm dltBtn"
-																data-id="{{$value->id}}"
+																data-id="{item.id}"
 																style={{
 																	height: 30,
 																	width: 30,
@@ -146,9 +142,11 @@ const Empshow = () => {
 															>
 																<i className="fas fa-trash-alt" />
 															</button>
-														</form>
 													</td>
 												</tr>
+													)
+												})}
+												
 											</tbody>
 										</table>
 									</div>

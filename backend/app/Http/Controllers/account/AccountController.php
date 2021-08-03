@@ -27,7 +27,7 @@ class AccountController extends Controller
         $total_cost = $extra_cost + $emp_salary;
         $profit = $package_sell-$total_cost;
         //$m_prof_rate=
-        return response()->json(['data'=> $data,'count'=>$count],200);
+        return response()->json($count,200);
     }
 
     public function ulist(){
@@ -39,7 +39,7 @@ class AccountController extends Controller
     public function edit( $id ,Request $req)
     {
         $data = ['LoggedUserInfo'=>user::where('id','=', $id)->first()];
-       return response()->json([$data]);
+       return response()->json($data);
     }
     
     /**
@@ -69,14 +69,14 @@ class AccountController extends Controller
                    
                 } else {
                 $message = "Profile Information Updated Succesfully";
-                return response()->json([$message],200);
+                return response()->json($message,200);
                 }
 
                
             }    
             $user->save();
             $message = "Profile information updated succesfully";
-            return response()->json([$message,'user'=>$user],200);
+            return response()->json([$message,$user],200);
     
    
       

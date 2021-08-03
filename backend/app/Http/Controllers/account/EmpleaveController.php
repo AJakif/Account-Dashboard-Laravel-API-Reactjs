@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\account;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\LeavePurpose;
 use App\Models\EmployeeLeave;
@@ -16,9 +17,8 @@ class EmpleaveController extends Controller
      */
     public function index()
     {
-        $data = ['LoggedUserInfo'=>user::where('id','=', session('LoggedUser'))->first()];
-        $data['alldata'] = EmployeeLeave::orderBy('id','desc')->get();
-        return response()->json([$data],200);
+        $data = EmployeeLeave::orderBy('id','desc')->get();
+        return response()->json($data,200);
     }
 
     /**

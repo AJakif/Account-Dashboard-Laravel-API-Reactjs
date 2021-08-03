@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\account;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\EmployeeSalaryLog;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+
 
 class EmpController extends Controller
 {
@@ -17,9 +19,8 @@ class EmpController extends Controller
      */
     public function index()
     {
-        $data = ['LoggedUserInfo'=>user::where('id','=', session('LoggedUser'))->first()];
-        $data['alldata'] = User::where('type','=' ,'employee')->orwhere('type','=' ,'guide')->get();
-        return response()->json([$data],200);
+        $data= User::where('type','=' ,'employee')->orwhere('type','=' ,'guide')->get();
+        return response()->json($data,200);
     }
 
     /**

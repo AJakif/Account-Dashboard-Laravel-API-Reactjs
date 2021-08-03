@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios"
 
 const Attshow = () => {
+	const [attd,setAttd] = useState([])
+
+	useEffect(() => {
+		loadCoupon();
+	}, []);
+	const loadCoupon = async () => {
+		await axios
+			.get(`http://127.0.0.1:8000/api/Employee/attendance/view`)
+			.then(response => setAttd(response.data))
+			.catch(error => {
+				return error;
+			});
+	};
 	return (
 		<>
 			<div className="card shadow mb-4">
@@ -56,16 +70,14 @@ const Attshow = () => {
 												</tr>
 											</thead>
 											<tbody>
-												<tr className="{{$value -> id}}">
+												{attd.map((item,i)=>{
+													return(
+														<tr className="{item.id}">
 													<td>
-														{"{"}
-														{"{"}$key+1{"}"}
-														{"}"}
+														{i+1}
 													</td>
 													<td>
-														{"{"}
-														{"{"}date('d-m-Y',strtotime($value-&gt;date)){"}"}
-														{"}"}
+														{item.date}
 													</td>
 													<td>
 														<a
@@ -98,6 +110,8 @@ const Attshow = () => {
 														</a>
 													</td>
 												</tr>
+													)
+												})}
 											</tbody>
 										</table>
 									</div>

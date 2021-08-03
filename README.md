@@ -1,12 +1,39 @@
 # This is a Accounts Dashboard developed with laravel Restful API and reactjs
 
-Versions
--------------
-* Laravel : 8.*
-* Composer : 2.*
-* React JS : 19.*
+## Table of Contents
+- [Overview](#overview)
+  - [Screenshot](#screenshot)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [Install & Run](#install-and-run-proccess)
+  - [Start Server](#start-the-server)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
 
-Install and Run Proccess:
+## Overview
+
+### Screenshot
+
+![Dashboard](./screeshots/1. dashboard.jpg)
+
+![Profile](./screeshots/2. Profile.jpg)
+
+![Edit Profile](./screeshots/3. Edit Profile.jpg)
+
+![Blog List](./screeshots/4. Blog List.jpg)
+
+
+
+
+## My process
+
+### Built with
+-------------
+- Laravel : 8.*
+- Composer : 2.*
+- React JS : 16.*
+
+###Install and Run Proccess:
 ---------------------------
 * Clone the repo to your local machine 
     -go to the local machine directory 
@@ -19,10 +46,16 @@ Install and Run Proccess:
 * Now Go to frontend folder
 * Open CMD and type (npm install)
 
-Start the server
+###Start the server
 --------------------------
 
 * Go to backend folder , open CMD and type (php artisan serve)
 * Go to front end folder , open CMD and type (npm start)
+
+## Author
+--------------------------
+- Website - 
+- Frontend Mentor - [@Ahmed Jahin Akif](https://www.frontendmentor.io/profile/AJakif)
+- Linkedin - [Ahmed Jahin Akif](https://www.linkedin.com/in/ahmed-jahin-akif-798498142/)
 
 # Please do give some suggestion, thank you

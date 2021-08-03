@@ -9,7 +9,6 @@ import Ccreate from "./content/coupon/Ccreate"
 import Empshow from "./content/employee/Empshow"
 import Empcreate from "./content/employee/Empcreate"
 import Empedit from "./content/employee/Empedit"
-import Settings from "./content/Settings"
 import Sidebar from "./Components/Sidebar";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
@@ -23,14 +22,13 @@ import Attview from "./content/attendance/Attview"
 import Leaveadd from "./content/leave/Leaveadd"
 import Leaveedit from "./content/leave/Leaveedit"
 import Leaveshow from "./content/leave/Leaveshow"
+import settings from "./content/settings"
 function App() {
 	return (
 		<div class="wrapper">
 			<Navbar />
 			<Sidebar />
 			<div className="content-wrapper">
-				{/* Content Header (Page header) */}
-				{/* /.content-header */}
 				<div className="container">
 					<Router>
 						<Switch>
@@ -43,7 +41,7 @@ function App() {
 							<Route path="/employee" exact component={Empshow} />
 							<Route path="/employee/create" exact component={Empcreate} />
 							<Route path="/employee/edit" exact component={Empedit} />
-							<Route path="/settings" exact component={Settings} />
+							<Route path="/settings" exact component={settings} />
 							<Route path="/blog" exact component={Blog} />
 							<Route path="/blog/create" exact component={CreateBlog} />
 							<Route path="/blog/edit" exact component={EditBlog} />
